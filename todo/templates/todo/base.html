@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}To-Do App{% endblock %}</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f7fb;
+        }
+
+        .navbar-custom {
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+        }
+
+        .app-title {
+            color: #4e54c8;
+            font-weight: 700;
+        }
+
+        .empty-box {
+            background: linear-gradient(135deg, #e0f7ff, #f1fbff);
+            border-left: 6px solid #4e54c8;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-custom navbar-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'todo_list' %}">
+            📝 To-Do App
+        </a>
+
+        <a href="{% url 'todo_create' %}" class="btn btn-light btn-sm fw-semibold">
+            + Add To-Do
+        </a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

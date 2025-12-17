@@ -1,29 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>To-Do List</title>
-</head>
-<body>
-<h1>My To-Do List</h1>
+{% extends 'todo/base.html' %}
 
-<a href="{% url 'todo_create' %}">
-    <button>Add New To-Do</button>
-</a>
+{% block title %}My To-Dos{% endblock %}
 
-<ul>
+{% block content %}
+
+<h2 class="text-center mb-4 app-title">
+    📋 My To-Do List
+</h2>
+
+{% if todos %}
+<div class="row">
     {% for todo in todos %}
-        <li>
-            <strong>{{ todo.subject }}</strong><br>
-            {{ todo.notes }}<br><br>
-
-            <a href="{% url 'todo_update' todo.id %}">Edit</a> |
-            <a href="{% url 'todo_delete' todo.id %}">Delete</a>
-        </li>
-        <hr>
-    {% empty %}
-        <p>No To-Dos available.</p>
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary fw-semibold">
+                    {{ todo.subject }}
+                </h5>
+                <p class="card-text text-muted">
+                    {{ todo.notes }}
+                </p>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-between">
+                <a href="{% url 'todo_update' todo.id %}" class="btn btn-outline-warning btn-sm">
+                    Edit
+                </a>
+                <a href="{% url 'todo_delete' todo.id %}"
+                   class="btn btn-outline-danger btn-sm"
+                   onclick="return confirm('Delete this To-Do?');">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-</ul>
+</div>
+{% else %}
+<div class="alert empty-box text-center shadow-sm py-4">
+    <h5 class="mb-2">✨ No To-Dos Yet</h5>
+    <p class="mb-0">
+        Click <strong>Add To-Do</strong> to create your first task.
+    </p>
+</div>
+{% endif %}
 
-</body>
-</html>
+{% endblock %}
