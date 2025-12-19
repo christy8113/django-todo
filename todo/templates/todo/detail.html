@@ -1,0 +1,42 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}View To-Do{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+
+            <div class="card-header text-white"
+                 style="background: linear-gradient(90deg, #4e54c8, #8f94fb);">
+                <h4 class="mb-0">📄 To-Do Details</h4>
+            </div>
+
+            <div class="card-body">
+                <h5 class="fw-bold text-primary">{{ todo.subject }}</h5>
+                <p class="text-muted mt-3">{{ todo.notes }}</p>
+            </div>
+
+            <div class="card-footer bg-white d-flex justify-content-between">
+                <a href="{% url 'todo_list' %}" class="btn btn-secondary">
+                    Back
+                </a>
+
+                <div>
+                    <a href="{% url 'todo_update' todo.id %}" class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+                    <a href="{% url 'todo_delete' todo.id %}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this To-Do?');">
+                        Delete
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -18,23 +18,36 @@
                     {{ todo.subject }}
                 </h5>
                 <p class="card-text text-muted">
-                    {{ todo.notes }}
+                    {{ todo.notes|truncatewords:15 }}
                 </p>
             </div>
-            <div class="card-footer bg-white d-flex justify-content-between">
-                <a href="{% url 'todo_update' todo.id %}" class="btn btn-outline-warning btn-sm">
-                    Edit
+
+            <!-- 🔽 MODIFIED BUTTON SECTION -->
+            <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                <a href="{% url 'todo_detail' todo.id %}"
+                   class="btn btn-outline-primary btn-sm">
+                    View
                 </a>
-                <a href="{% url 'todo_delete' todo.id %}"
-                   class="btn btn-outline-danger btn-sm"
-                   onclick="return confirm('Delete this To-Do?');">
-                    Delete
-                </a>
+
+                <div>
+                    <a href="{% url 'todo_update' todo.id %}"
+                       class="btn btn-outline-warning btn-sm me-1">
+                        Edit
+                    </a>
+                    <a href="{% url 'todo_delete' todo.id %}"
+                       class="btn btn-outline-danger btn-sm"
+                       onclick="return confirm('Delete this To-Do?');">
+                        Delete
+                    </a>
+                </div>
             </div>
+            <!-- 🔼 END BUTTON SECTION -->
+
         </div>
     </div>
     {% endfor %}
 </div>
+
 {% else %}
 <div class="alert empty-box text-center shadow-sm py-4">
     <h5 class="mb-2">✨ No To-Dos Yet</h5>
